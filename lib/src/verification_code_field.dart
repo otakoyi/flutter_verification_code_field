@@ -74,6 +74,14 @@ class VerificationCodeField extends HookWidget {
             moveToPrevious();
             return KeyEventResult.handled;
           }
+          if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+            moveToPrevious();
+            return KeyEventResult.handled;
+          }
+          if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+            moveToNext();
+            return KeyEventResult.handled;
+          }
           if (character.isNotEmpty && pattern.hasMatch(event.character ?? '')) {
             textControllers[currentIndex.value].text =
                 code.value[currentIndex.value] = event.character ?? '';
@@ -93,8 +101,6 @@ class VerificationCodeField extends HookWidget {
       },
       [focusNodes],
     );
-
-    final hasError = useState(false);
 
     return CallbackShortcuts(
       bindings: {
@@ -126,7 +132,6 @@ class VerificationCodeField extends HookWidget {
                           focusNode: focusNodes[index],
                           size: size,
                           onChanged: (value) {
-                            hasError.value = false;
                             if (value.isNotEmpty) {
                               moveToNext();
                             }
