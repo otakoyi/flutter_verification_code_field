@@ -4,8 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_verification_code_field/src/hooks/focus_node_list_hook.dart';
 import 'package:flutter_verification_code_field/src/hooks/text_controller_list_hook.dart';
 
-class ConfirmationCodeInput extends HookWidget {
-  ConfirmationCodeInput({
+class VerificationCodeField extends HookWidget {
+  VerificationCodeField({
     required this.length,
     this.onFilled,
     this.size = const Size(40, 60),
@@ -120,7 +120,7 @@ class ConfirmationCodeInput extends HookWidget {
                         margin: EdgeInsets.only(
                           left: index == 0 ? 0 : margin,
                         ),
-                        child: _CodeDigitInputField(
+                        child: _VerificationCodeCharacterField(
                           pattern: pattern,
                           controller: textControllers[index],
                           focusNode: focusNodes[index],
@@ -150,9 +150,9 @@ class ConfirmationCodeInput extends HookWidget {
   }
 }
 
-class _CodeDigitInputField extends StatelessWidget {
-  /// Default constructor for [_CodeDigitInputField]
-  const _CodeDigitInputField({
+class _VerificationCodeCharacterField extends StatelessWidget {
+  /// Default constructor for [_VerificationCodeCharacterField]
+  const _VerificationCodeCharacterField({
     required this.controller,
     required this.focusNode,
     required this.onChanged,
