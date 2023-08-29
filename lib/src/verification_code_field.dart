@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_verification_code_field/src/hooks/focus_node_list_hook.dart';
 import 'package:flutter_verification_code_field/src/hooks/text_controller_list_hook.dart';
+import 'package:flutter_verification_code_field/src/widgets/verification_code_character_field_widget.dart';
 
 class VerificationCodeField extends HookWidget {
   VerificationCodeField({
@@ -126,7 +127,7 @@ class VerificationCodeField extends HookWidget {
                         margin: EdgeInsets.only(
                           left: index == 0 ? 0 : margin,
                         ),
-                        child: _VerificationCodeCharacterField(
+                        child: VerificationCodeCharacterFieldWidget(
                           pattern: pattern,
                           controller: textControllers[index],
                           focusNode: focusNodes[index],
@@ -151,69 +152,6 @@ class VerificationCodeField extends HookWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _VerificationCodeCharacterField extends StatelessWidget {
-  /// Default constructor for [_VerificationCodeCharacterField]
-  const _VerificationCodeCharacterField({
-    required this.controller,
-    required this.focusNode,
-    required this.onChanged,
-    required this.onPaste,
-    required this.size,
-    required this.pattern,
-  });
-
-  final FocusNode focusNode;
-
-  final TextEditingController controller;
-
-  final ValueChanged<String> onChanged;
-
-  final VoidCallback onPaste;
-
-  final Size size;
-
-  final RegExp pattern;
-
-  @override
-  Widget build(BuildContext context) {
-    const decoration = InputDecoration(
-      counterText: '',
-      // contentPadding: EdgeInsets.all((size * 2) / 10),
-      errorMaxLines: 1,
-    );
-
-    return TextField(
-      controller: controller,
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.allow(pattern)],
-      maxLength: 1,
-      focusNode: focusNode,
-      style: TextStyle(fontSize: size.height / 2),
-      contextMenuBuilder: (context, editableTextState) {
-        return AdaptiveTextSelectionToolbar.editable(
-          clipboardStatus: ClipboardStatus.pasteable,
-          onCopy: null,
-          onCut: null,
-          onPaste: () {
-            onPaste();
-            editableTextState.hideToolbar();
-          },
-          onSelectAll: null,
-          anchors: editableTextState.contextMenuAnchors,
-          onLiveTextInput: null,
-        );
-      },
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      autocorrect: false,
-      textAlign: TextAlign.center,
-      autofocus: true,
-      decoration: decoration,
-      //      textInputAction: TextInputAction.previous,
-      onChanged: onChanged,
     );
   }
 }
