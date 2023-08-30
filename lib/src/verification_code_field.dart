@@ -91,10 +91,10 @@ class VerificationCodeField extends HookWidget {
           }
           return KeyEventResult.ignored;
         };
-        for (var i = 0; i < length; i++) {
-          focusNodes[i].addListener(() {
-            if (focusNodes[i].hasFocus) {
-              currentIndex.value = i;
+        for (final (index, focusNode) in focusNodes.indexed) {
+          focusNode.addListener(() {
+            if (focusNode.hasFocus) {
+              currentIndex.value = index;
             }
           });
         }
