@@ -57,6 +57,7 @@ class VerificationCodeField extends HookWidget {
       for (var i = 0; i < length; i++) {
         textControllers[i].text = code.value[i] = latestClipboard[i];
       }
+      onFilled?.call(latestClipboard);
       focusScope.requestFocus(focusNodes.lastOrNull);
     });
 
