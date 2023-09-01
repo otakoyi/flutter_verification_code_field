@@ -18,7 +18,7 @@ class VerificationCodeField extends HookWidget {
   }
 
   final int length;
-  final VoidCallback? onFilled;
+  final ValueChanged<String>? onFilled;
   final Size size;
   final double margin;
   late final RegExp pattern;
@@ -137,9 +137,10 @@ class VerificationCodeField extends HookWidget {
                               moveToNext();
                             }
                             code.value[index] = value;
+                            final codeString = code.value.join();
                             if (onFilled != null &&
-                                code.value.join().length == length) {
-                              onFilled?.call();
+                                codeString.length == length) {
+                              onFilled?.call(codeString);
                             }
                           },
                           onPaste: onPaste,
