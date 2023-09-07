@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+/// A function that is used to generate an list of TextField Controllers.
 List<TextEditingController> useTextControllerList({
   required int length,
   String? debugLabel,

@@ -5,22 +5,36 @@ import 'package:flutter_verification_code_field/src/hooks/focus_node_list_hook.d
 import 'package:flutter_verification_code_field/src/hooks/text_controller_list_hook.dart';
 import 'package:flutter_verification_code_field/src/widgets/verification_code_character_field_widget.dart';
 
+/// OTP Text Field widget
 class VerificationCodeField extends HookWidget {
+  /// Default constructor for [VerificationCodeField]
   VerificationCodeField({
     required this.length,
     this.onFilled,
     this.size = const Size(40, 60),
-    this.margin = 16,
+    this.spaceBetween = 16,
     RegExp? matchingPattern,
     super.key,
   }) : assert(length > 0, 'Length must be positive') {
     pattern = matchingPattern ?? RegExp(r'^\d+$');
   }
 
+  /// Number of the OTP Fields [int].
   final int length;
+
+  /// Callback function that is called when the verification code is filled [ValueChanged].
   final ValueChanged<String>? onFilled;
+
+  /// Size of the single OTP Field
+  /// default: Size(40, 60) [Size]
   final Size size;
-  final double margin;
+
+  /// Space between the text fields
+  /// default: 16 [double],
+  final double spaceBetween;
+
+  /// Pattern for validation.
+  /// default: RegExp(r'^\d+$') [RegExp]
   late final RegExp pattern;
 
   @override
@@ -126,7 +140,7 @@ class VerificationCodeField extends HookWidget {
                         height: size.height,
                         width: size.width,
                         margin: EdgeInsets.only(
-                          left: index == 0 ? 0 : margin,
+                          left: index == 0 ? 0 : spaceBetween,
                         ),
                         child: VerificationCodeCharacterFieldWidget(
                           pattern: pattern,
