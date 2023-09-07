@@ -13,7 +13,7 @@ class VerificationCodeField extends HookWidget {
     this.margin = 16,
     RegExp? matchingPattern,
     super.key,
-  }) {
+  }) : assert(length > 0, 'Length must be positive') {
     pattern = matchingPattern ?? RegExp(r'^\d+$');
   }
 

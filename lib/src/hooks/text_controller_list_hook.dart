@@ -5,7 +5,6 @@ List<TextEditingController> useTextControllerList({
   required int length,
   String? debugLabel,
 }) {
-  assert(length > 0, 'Length must be positive');
   return use(
     _TextControllerListHook(length: length),
   );
