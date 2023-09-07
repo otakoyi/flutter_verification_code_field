@@ -109,7 +109,6 @@ class VerificationCodeField extends HookWidget {
         const SingleActivator(LogicalKeyboardKey.keyV, control: true): onPaste,
       },
       child: FocusScope(
-        key: const ValueKey('focusScope'),
         node: focusScope,
         child: Column(
           children: [
