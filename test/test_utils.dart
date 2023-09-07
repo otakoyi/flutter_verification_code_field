@@ -18,21 +18,23 @@ extension Repeat on int {
   }
 }
 
-Future<void> prepare(WidgetTester tester) async {
-  await tester.pumpWidget(AppWrapper(
-      child: VerificationCodeField(
-    length: length,
-  )));
-}
+extension TesterX on WidgetTester {
+  Future<void> prepare() async {
+    await pumpWidget(AppWrapper(
+        child: VerificationCodeField(
+      length: length,
+    )));
+  }
 
-List<TextField> textFields(WidgetTester tester) {
-  return [for (final field in tester.widgetList(finder)) (field as TextField)];
-}
+  List<TextField> textFields() {
+    return [for (final field in widgetList(finder)) (field as TextField)];
+  }
 
-List<FocusNode> focusNodes(WidgetTester tester) {
-  final nodes = [
-    for (final field in textFields(tester))
-      if (field.focusNode case final node?) node
-  ];
-  return nodes;
+  List<FocusNode> focusNodes() {
+    final nodes = [
+      for (final field in textFields())
+        if (field.focusNode case final node?) node
+    ];
+    return nodes;
+  }
 }

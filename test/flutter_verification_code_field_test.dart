@@ -8,22 +8,22 @@ import 'test_utils.dart';
 
 void main() {
   testWidgets('Check the number of fields and nodes', (tester) async {
-    await prepare(tester);
+    await tester.prepare();
     expect(finder, findsNWidgets(length));
-    expect(focusNodes(tester).length, length);
+    expect(tester.focusNodes().length, length);
   });
 
   testWidgets('First field is focused', (tester) async {
-    await prepare(tester);
-    expect(focusNodes(tester)[0], predicate<FocusNode>((n) => n.hasFocus));
+    await tester.prepare();
+    expect(tester.focusNodes()[0], predicate<FocusNode>((n) => n.hasFocus));
   });
 
   testWidgets('Arrow keys are moving the cursor', (tester) async {
-    await prepare(tester);
+    await tester.prepare();
     final stepsRight = Random().nextInt(length - 2) + 1;
     await stepsRight.repeat(
         () async => await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight));
-    final nodes = focusNodes(tester);
+    final nodes = tester.focusNodes();
 
     expect(nodes[stepsRight].hasFocus, true);
     nodes.first.requestFocus();
