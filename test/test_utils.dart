@@ -7,6 +7,7 @@ import 'package:flutter_verification_code_field/flutter_verification_code_field.
 import 'app_wrapper.dart';
 
 const length = 6;
+final finder = find.byType(TextField);
 
 extension Repeat on int {
   FutureOr<void> repeat(FutureOr<void> Function() fn) async {
@@ -23,8 +24,6 @@ Future<void> prepare(WidgetTester tester) async {
     length: length,
   )));
 }
-
-final finder = find.byType(TextField);
 
 List<TextField> textFields(WidgetTester tester) {
   return [for (final field in tester.widgetList(finder)) (field as TextField)];
