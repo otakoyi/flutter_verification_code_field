@@ -1,3 +1,5 @@
+library flutter_verification_code_field;
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
