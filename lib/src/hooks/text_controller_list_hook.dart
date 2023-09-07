@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+@protected
 List<TextEditingController> useTextControllerList({
   required int length,
   String? debugLabel,
