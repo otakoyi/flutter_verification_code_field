@@ -38,7 +38,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const decoration = InputDecoration(
       counterText: '',
-      // contentPadding: EdgeInsets.all((size * 2) / 10),
       errorMaxLines: 1,
     );
 
@@ -68,7 +67,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
       textAlign: TextAlign.center,
       autofocus: true,
       decoration: decoration,
-      //      textInputAction: TextInputAction.previous,
       onChanged: onChanged,
     );
   }
