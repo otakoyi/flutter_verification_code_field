@@ -26,13 +26,13 @@ extension TesterX on WidgetTester {
     )));
   }
 
-  List<TextField> textFields() {
+  List<TextField> getTextFields() {
     return [for (final field in widgetList(finder)) (field as TextField)];
   }
 
-  List<FocusNode> focusNodes() {
+  List<FocusNode> getFocusNodes() {
     final nodes = [
-      for (final field in textFields())
+      for (final field in getTextFields())
         if (field.focusNode case final node?) node
     ];
     return nodes;

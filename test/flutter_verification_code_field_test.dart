@@ -10,12 +10,12 @@ void main() {
   testWidgets('Check the number of fields and nodes', (tester) async {
     await tester.prepare();
     expect(finder, findsNWidgets(length));
-    expect(tester.focusNodes().length, length);
+    expect(tester.getFocusNodes().length, length);
   });
 
   testWidgets('First field is focused', (tester) async {
     await tester.prepare();
-    expect(tester.focusNodes()[0], predicate<FocusNode>((n) => n.hasFocus));
+    expect(tester.getFocusNodes()[0], predicate<FocusNode>((n) => n.hasFocus));
   });
 
   testWidgets('Arrow keys are moving the cursor', (tester) async {
@@ -23,7 +23,7 @@ void main() {
     final stepsRight = Random().nextInt(length - 2) + 1;
     await stepsRight.repeat(
         () async => await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight));
-    final nodes = tester.focusNodes();
+    final nodes = tester.getFocusNodes();
 
     expect(nodes[stepsRight].hasFocus, true);
     nodes.first.requestFocus();
