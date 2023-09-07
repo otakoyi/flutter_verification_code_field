@@ -26,7 +26,8 @@ class _FocusNodeListHook extends Hook<List<FocusNode>> {
   }
 }
 
-class _FocusNodeListHookState extends HookState<List<FocusNode>, _FocusNodeListHook> {
+class _FocusNodeListHookState
+    extends HookState<List<FocusNode>, _FocusNodeListHook> {
   late final List<FocusNode> _focusNodes = [];
 
   @override

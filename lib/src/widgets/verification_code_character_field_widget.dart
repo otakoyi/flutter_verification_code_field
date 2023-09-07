@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+@visibleForTesting
 class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   /// Default constructor for [VerificationCodeCharacterFieldWidget]
   const VerificationCodeCharacterFieldWidget({
@@ -10,6 +11,7 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     required this.onPaste,
     required this.size,
     required this.pattern,
+    super.key,
   });
 
   final FocusNode focusNode;
