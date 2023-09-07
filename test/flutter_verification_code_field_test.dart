@@ -20,18 +20,18 @@ void main() {
 
   testWidgets('Arrow keys are moving the cursor', (tester) async {
     await tester.prepare();
-    final stepsRight = Random().nextInt(length - 2) + 1;
-    await stepsRight.repeat(
-        () async => await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight));
     final nodes = tester.getFocusNodes();
 
+    final stepsRight = Random().nextInt(length - 1) + 1;
+    await stepsRight.repeat(
+        () async => await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight));
     expect(nodes[stepsRight].hasFocus, true);
     nodes.first.requestFocus();
     await length.repeat(
         () async => await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight));
     expect(nodes.last.hasFocus, true);
     nodes.last.requestFocus();
-    final stepsLeft = Random().nextInt(length - 2) + 1;
+    final stepsLeft = Random().nextInt(length - 1) + 1;
     await stepsLeft.repeat(
         () async => await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft));
     expect(nodes[length - 1 - stepsLeft].hasFocus, true);
