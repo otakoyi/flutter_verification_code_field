@@ -5,7 +5,6 @@ List<FocusNode> useFocusNodeList({
   required int length,
   String? debugLabel,
 }) {
-  assert(length > 0, 'Length must be positive');
   return use(
     _FocusNodeListHook(debugLabel: debugLabel, length: length),
   );

@@ -13,7 +13,7 @@ class VerificationCodeField extends HookWidget {
     this.margin = 16,
     RegExp? matchingPattern,
     super.key,
-  }) {
+  }) : assert(length > 0, 'Length must be positive') {
     pattern = matchingPattern ?? RegExp(r'^\d+$');
   }
 
@@ -109,6 +109,7 @@ class VerificationCodeField extends HookWidget {
         const SingleActivator(LogicalKeyboardKey.keyV, control: true): onPaste,
       },
       child: FocusScope(
+        key: const ValueKey('focusScope'),
         node: focusScope,
         child: Column(
           children: [
