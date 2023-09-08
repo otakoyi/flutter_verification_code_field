@@ -16,10 +16,10 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     super.key,
   });
 
-  /// FocusNode Controller [FocusNode]
+  /// FocusNode Controller [FocusNode].
   final FocusNode focusNode;
 
-  /// TextField Controller [TextEditingController]
+  /// TextField Controller [TextEditingController].
   final TextEditingController controller;
 
   /// A callback function that is called when a change is detected on the pin [ValueChanged].
