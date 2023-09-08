@@ -26,14 +26,17 @@ class VerificationCodeField extends HookWidget {
   final ValueChanged<String>? onFilled;
 
   /// Size of the single OTP Field
+  /// 
   /// default: Size(40, 60) [Size].
   final Size size;
 
   /// Space between the text fields
+  /// 
   /// default: 16 [double].
   final double spaceBetween;
 
   /// Pattern for validation
+  /// 
   /// default: RegExp(r'^\d+$') [RegExp].
   late final RegExp pattern;
 
