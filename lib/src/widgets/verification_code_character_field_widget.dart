@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 
 @visibleForTesting
 
-/// Single OTP Field
+/// The VerificationCodeField entry point
+///
+/// To use the VerificationCodeField class, call VerificationCodeField(controller: $controller, focusNode: $focusNode, onChanged: $onChanged, onPaste: $onPaste, size: $size, pattern: $pattern)
 class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   /// Default constructor for [VerificationCodeCharacterFieldWidget]
   const VerificationCodeCharacterFieldWidget({
@@ -23,6 +25,8 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   final TextEditingController controller;
 
   /// A callback function that is called when a change is detected on the pin [ValueChanged].
+  ///
+  /// If the field data is changed, returns new data [String]
   final ValueChanged<String> onChanged;
 
   /// A callback function that is called when a paste operation is detected on the pin [VoidCallback].

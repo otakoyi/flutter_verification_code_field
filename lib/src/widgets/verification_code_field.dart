@@ -5,7 +5,9 @@ import 'package:flutter_verification_code_field/src/hooks/focus_node_list_hook.d
 import 'package:flutter_verification_code_field/src/hooks/text_controller_list_hook.dart';
 import 'package:flutter_verification_code_field/src/widgets/verification_code_character_field_widget.dart';
 
-/// OTP Text Field widget
+/// The VerificationCodeField entry point
+/// 
+/// To use the VerificationCodeField class, call VerificationCodeField(length: $length)
 class VerificationCodeField extends HookWidget {
   /// Default constructor for [VerificationCodeField]
   VerificationCodeField({
@@ -23,6 +25,8 @@ class VerificationCodeField extends HookWidget {
   final int length;
 
   /// Callback function that is called when the verification code is filled [ValueChanged].
+  /// 
+  /// If the field is filled, returns data [String] 
   final ValueChanged<String>? onFilled;
 
   /// Size of the single OTP Field
@@ -49,6 +53,7 @@ class VerificationCodeField extends HookWidget {
     final focusScope = useFocusScopeNode();
     final currentIndex = useRef(0);
 
+    /// Used to move the focus to the previous OTP field
     final moveToPrevious = useCallback(() {
       if (currentIndex.value > 0) {
         currentIndex.value--;
@@ -56,6 +61,7 @@ class VerificationCodeField extends HookWidget {
       }
     });
 
+    /// Used to move the focus to the next OTP field
     final moveToNext = useCallback(() {
       if (currentIndex.value < length - 1) {
         currentIndex.value++;
@@ -63,6 +69,7 @@ class VerificationCodeField extends HookWidget {
       }
     });
 
+    /// Called when information is pasted into an input field 
     final onPaste = useCallback(() async {
       final latestClipboard =
           (await Clipboard.getData(Clipboard.kTextPlain))?.text;
