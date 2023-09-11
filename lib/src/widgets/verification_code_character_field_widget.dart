@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 @visibleForTesting
+
+/// The VerificationCodeField entry point
+///
+/// To use the VerificationCodeField class, call VerificationCodeField(controller: $controller, focusNode: $focusNode, onChanged: $onChanged, onPaste: $onPaste, size: $size, pattern: $pattern)
 class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   /// Default constructor for [VerificationCodeCharacterFieldWidget]
   const VerificationCodeCharacterFieldWidget({
@@ -14,23 +18,30 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     super.key,
   });
 
+  /// FocusNode Controller [FocusNode].
   final FocusNode focusNode;
 
+  /// TextField Controller [TextEditingController].
   final TextEditingController controller;
 
+  /// A callback function that is called when a change is detected on the pin [ValueChanged].
+  ///
+  /// If the field data is changed, returns new data [String]
   final ValueChanged<String> onChanged;
 
+  /// A callback function that is called when a paste operation is detected on the pin [VoidCallback].
   final VoidCallback onPaste;
 
+  /// Size of the OTP Field [Size].
   final Size size;
 
+  /// Pattern for validation [RegExp].
   final RegExp pattern;
 
   @override
   Widget build(BuildContext context) {
     const decoration = InputDecoration(
       counterText: '',
-      // contentPadding: EdgeInsets.all((size * 2) / 10),
       errorMaxLines: 1,
     );
 
@@ -60,7 +71,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
       textAlign: TextAlign.center,
       autofocus: true,
       decoration: decoration,
-      //      textInputAction: TextInputAction.previous,
       onChanged: onChanged,
     );
   }
