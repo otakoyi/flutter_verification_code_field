@@ -6,7 +6,7 @@ import 'package:flutter_verification_code_field/src/hooks/text_controller_list_h
 import 'package:flutter_verification_code_field/src/widgets/verification_code_character_field_widget.dart';
 
 /// The VerificationCodeField entry point
-/// 
+///
 /// To use the VerificationCodeField class, call VerificationCodeField(length: $length)
 class VerificationCodeField extends HookWidget {
   /// Default constructor for [VerificationCodeField]
@@ -25,22 +25,22 @@ class VerificationCodeField extends HookWidget {
   final int length;
 
   /// Callback function that is called when the verification code is filled [ValueChanged].
-  /// 
-  /// If the field is filled, returns data [String] 
+  ///
+  /// If the field is filled, returns data [String]
   final ValueChanged<String>? onFilled;
 
   /// Size of the single OTP Field
-  /// 
+  ///
   /// default: Size(40, 60) [Size].
   final Size size;
 
   /// Space between the text fields
-  /// 
+  ///
   /// default: 16 [double].
   final double spaceBetween;
 
   /// Pattern for validation
-  /// 
+  ///
   /// default: RegExp(r'^\d+$') [RegExp].
   late final RegExp pattern;
 
@@ -69,7 +69,7 @@ class VerificationCodeField extends HookWidget {
       }
     });
 
-    /// Called when information is pasted into an input field 
+    /// Called when information is pasted into an input field
     final onPaste = useCallback(() async {
       final latestClipboard =
           (await Clipboard.getData(Clipboard.kTextPlain))?.text;
@@ -130,7 +130,11 @@ class VerificationCodeField extends HookWidget {
 
     return CallbackShortcuts(
       bindings: {
-        const SingleActivator(LogicalKeyboardKey.keyV, control: true): onPaste,
+        const SingleActivator(
+          LogicalKeyboardKey.keyV,
+          control: true,
+          meta: true,
+        ): onPaste,
       },
       child: FocusScope(
         node: focusScope,
