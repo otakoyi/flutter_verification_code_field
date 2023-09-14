@@ -130,11 +130,8 @@ class VerificationCodeField extends HookWidget {
 
     return CallbackShortcuts(
       bindings: {
-        const SingleActivator(
-          LogicalKeyboardKey.keyV,
-          control: true,
-          meta: true,
-        ): onPaste,
+        const SingleActivator(LogicalKeyboardKey.keyV, control: true): onPaste,
+        const SingleActivator(LogicalKeyboardKey.keyV, meta: true): onPaste,
       },
       child: FocusScope(
         node: focusScope,
