@@ -1,6 +1,6 @@
 name: flutter_verification_code_field
 description: Flutter verification code input.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/otakoyi/flutter_verification_code_field
 
 environment:
