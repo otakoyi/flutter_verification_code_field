@@ -1,6 +1,6 @@
 ## 1.0.1
 
-* Updated readme and supported platforms.
+* Updated readme.
 
 ## 1.0.0
 
