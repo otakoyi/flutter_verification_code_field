@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/otakoyi/flutter_verification_code_field/blob/readmy_update/display/example.gif"/></p>
+<p align="center"><img src="https://github.com/otakoyi/flutter_verification_code_field/blob/main/display/example.gif"/></p>
 
 <h1 align="center">Flutter Verification Code Field</h1>
 
