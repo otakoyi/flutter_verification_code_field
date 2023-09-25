@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_verification_code_field/flutter_verification_code_field.dart';
 
@@ -19,10 +20,11 @@ extension Repeat on int {
 }
 
 extension TesterX on WidgetTester {
-  Future<void> prepare() async {
+  Future<void> prepare([RegExp? regex]) async {
     await pumpWidget(AppWrapper(
         child: VerificationCodeField(
       length: length,
+      matchingPattern: regex,
     )));
   }
 
@@ -36,5 +38,35 @@ extension TesterX on WidgetTester {
         if (field.focusNode case final node?) node
     ];
     return nodes;
+  }
+}
+
+class RepeatTextPaste {
+  FutureOr<void> repeatWithParameters({
+    bool isLogicalKeyboard = false,
+    required WidgetTester tester,
+    required String text,
+    required FocusNode node,
+    int startingPoint = 0,
+    List<TextField> textFields = const [],
+  }) async {
+    assert(startingPoint >= 0);
+
+    if (!node.hasFocus) {
+      node.requestFocus();
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+
+    if (isLogicalKeyboard) {
+      await tester.sendKeyEvent(LogicalKeyboardKey.paste);
+    } else {
+      await tester.longPress(find.byWidget(textFields[0]));
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.tap(find.text('Paste'));
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    for (int i = 0; i < textFields.length; i++) {
+      expect(textFields[i].controller!.text, text[i]);
+    }
   }
 }
