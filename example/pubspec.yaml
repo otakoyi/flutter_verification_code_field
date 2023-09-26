@@ -1,0 +1,20 @@
+name: flutter_verification_code_field_example
+description: Demonstrates how to use the flutter_verification_code_field.
+publish_to: 'none'  
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_verification_code_field:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+ 
+flutter:
+  uses-material-design: true
+ 
