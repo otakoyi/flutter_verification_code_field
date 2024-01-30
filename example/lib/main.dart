@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
             title: const Text('Flutter Verification Code Field Example')),
-        body: Padding(
-          padding: const EdgeInsets.all(24),
+        body: const Padding(
+          padding: EdgeInsets.all(24),
           child: MyCodeInput(),
         ),
       ),
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyCodeInput extends StatelessWidget {
-  MyCodeInput({
+  const MyCodeInput({
     super.key,
   });
 
@@ -34,12 +34,11 @@ class MyCodeInput extends StatelessWidget {
             length: 5,
             spaceBetween: 10,
             onFilled: (value) {
-              ScaffoldMessenger.of(context)
-                ..showSnackBar(
-                  SnackBar(
-                    content: Text('$value Submitted successfully! 🎉'),
-                  ),
-                );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('$value Submitted successfully! 🎉'),
+                ),
+              );
             }),
       ],
     );
