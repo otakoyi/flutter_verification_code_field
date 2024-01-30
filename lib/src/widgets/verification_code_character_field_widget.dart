@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-@visibleForTesting
-
 /// The VerificationCodeField entry point
 ///
 /// To use the VerificationCodeField class, call VerificationCodeField(controller: $controller, focusNode: $focusNode, onChanged: $onChanged, onPaste: $onPaste, size: $size, pattern: $pattern)
@@ -54,6 +52,9 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
       style: TextStyle(fontSize: size.height / 2),
       contextMenuBuilder: (context, editableTextState) {
         return AdaptiveTextSelectionToolbar.editable(
+          onShare: null,
+          onSearchWeb: null,
+          onLookUp: null,
           clipboardStatus: ClipboardStatus.pasteable,
           onCopy: null,
           onCut: null,
