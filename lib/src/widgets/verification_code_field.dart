@@ -17,7 +17,9 @@ class VerificationCodeField extends HookWidget {
     this.spaceBetween = 16,
     RegExp? matchingPattern,
     super.key,
-  }) : assert(length > 0, 'Length must be positive') {
+  })  : assert(length > 0, 'Length must be positive'),
+        assert(size.height != double.infinity && size.width != double.infinity,
+            'The height and width of the Size must be finite.') {
     pattern = matchingPattern ?? RegExp(r'^\d+$');
   }
 
