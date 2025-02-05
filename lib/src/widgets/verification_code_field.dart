@@ -13,7 +13,7 @@ class VerificationCodeField extends HookWidget {
   VerificationCodeField({
     required this.length,
     this.onFilled,
-    this.size = const Size(40, 60),
+    this.size = const Size(40, 40),
     this.spaceBetween = 16,
     this.placeholder = '',
     this.showCursor,
@@ -36,7 +36,7 @@ class VerificationCodeField extends HookWidget {
 
   /// Size of the single OTP Field
   ///
-  /// default: Size(40, 60) [Size].
+  /// default: Size(40, 40) [Size].
   final Size size;
 
   /// Space between the text fields
@@ -149,56 +149,43 @@ class VerificationCodeField extends HookWidget {
       },
       child: FocusScope(
         node: focusScope,
-        child: Column(
+        child: Row(
+          spacing: spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            LayoutBuilder(
-              builder: (context, constraints) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (int index = 0; index < length; index++)
-                      Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        height: size.height,
-                        width: size.width,
-                        margin: EdgeInsets.only(
-                          left: index == 0 ? 0 : spaceBetween,
-                        ),
-                        child: VerificationCodeCharacterFieldWidget(
-                          pattern: pattern,
-                          autofocus: autofocus,
-                          controller: textControllers[index],
-                          focusNode: focusNodes[index],
-                          size: size,
-                          placeholder: placeholder,
-                          showCursor: showCursor,
-                          onChanged: (value) {
-                            if (value.isNotEmpty) {
-                              moveToNext();
-                            }
-                            if (value.isEmpty &&
-                                code.value.where((e) => e.isNotEmpty).length >
-                                    index) {
-                              moveToPrevious();
-                            }
-                            code.value[index] = value;
-                            final codeString = code.value.join();
-                            if (onFilled != null &&
-                                codeString.length == length) {
-                              focusScope.unfocus();
-                              onFilled?.call(codeString);
-                            }
-                          },
-                          onPaste: onPaste,
-                        ),
-                      ),
-                  ],
-                );
-              },
-            ),
+            for (int index = 0; index < length; index++)
+              SizedBox(
+                height: size.height,
+                width: size.width,
+                child: Align(
+                  child: VerificationCodeCharacterFieldWidget(
+                    pattern: pattern,
+                    autofocus: autofocus,
+                    controller: textControllers[index],
+                    focusNode: focusNodes[index],
+                    size: size,
+                    placeholder: placeholder,
+                    showCursor: showCursor,
+                    onChanged: (value) {
+                      if (value.isNotEmpty) {
+                        moveToNext();
+                      }
+                      if (value.isEmpty &&
+                          code.value.where((e) => e.isNotEmpty).length >
+                              index) {
+                        moveToPrevious();
+                      }
+                      code.value[index] = value;
+                      final codeString = code.value.join();
+                      if (onFilled != null && codeString.length == length) {
+                        focusScope.unfocus();
+                        onFilled?.call(codeString);
+                      }
+                    },
+                    onPaste: onPaste,
+                  ),
+                ),
+              ),
           ],
         ),
       ),

@@ -45,6 +45,7 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   /// Show or hide cursor
   final bool? showCursor;
 
+  /// Autofocus
   final bool autofocus;
 
   @override
@@ -52,11 +53,15 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     final decoration = InputDecoration(
       counterText: '',
       errorMaxLines: 1,
-      contentPadding: EdgeInsets.zero,
+      // Centers text which otherwise is skewered 4 px to the left
+      contentPadding: EdgeInsets.only(left: 2),
       hintText: placeholder,
     );
 
     return TextField(
+      expands: true,
+      minLines: null,
+      maxLines: null,
       controller: controller,
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.allow(pattern)],

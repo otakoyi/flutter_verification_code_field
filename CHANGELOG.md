@@ -1,4 +1,9 @@
-## 1.0.5
+## 1.0.7
+
+* Fixed paddings
+* Cleaned up layout
+
+## 1.0.6
 
 * Added more configuration options: placeholder, showCursor, autofocus
 * Bugfixes
