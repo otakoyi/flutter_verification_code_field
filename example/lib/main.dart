@@ -33,6 +33,7 @@ class MyCodeInput extends StatelessWidget {
         VerificationCodeField(
             length: 5,
             spaceBetween: 10,
+            placeholder: '·',
             onFilled: (value) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

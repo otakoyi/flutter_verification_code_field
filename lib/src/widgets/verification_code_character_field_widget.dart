@@ -13,6 +13,9 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     required this.onPaste,
     required this.size,
     required this.pattern,
+    required this.placeholder,
+    required this.showCursor,
+    required this.autofocus,
     super.key,
   });
 
@@ -36,11 +39,21 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   /// Pattern for validation [RegExp].
   final RegExp pattern;
 
+  /// Placeholder symbol
+  final String placeholder;
+
+  /// Show or hide cursor
+  final bool? showCursor;
+
+  final bool autofocus;
+
   @override
   Widget build(BuildContext context) {
-    const decoration = InputDecoration(
+    final decoration = InputDecoration(
       counterText: '',
       errorMaxLines: 1,
+      contentPadding: EdgeInsets.zero,
+      hintText: placeholder,
     );
 
     return TextField(
@@ -50,6 +63,8 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
       maxLength: 1,
       focusNode: focusNode,
       style: TextStyle(fontSize: size.height / 2),
+      cursorHeight: size.height / 2,
+      showCursor: showCursor,
       contextMenuBuilder: (context, editableTextState) {
         return AdaptiveTextSelectionToolbar.editable(
           onShare: null,
@@ -70,7 +85,7 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
       autocorrect: false,
       textAlign: TextAlign.center,
-      autofocus: true,
+      autofocus: autofocus,
       decoration: decoration,
       onChanged: onChanged,
     );
