@@ -1,5 +1,10 @@
 ## 1.0.5
 
+* Added more configuration options: placeholder, showCursor, autofocus
+* Bugfixes
+
+## 1.0.5
+
 * Updated dependecies
 
 ## 1.0.4

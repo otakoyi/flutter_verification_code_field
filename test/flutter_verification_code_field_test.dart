@@ -13,9 +13,15 @@ void main() {
     expect(tester.getFocusNodes().length, length);
   });
 
-  testWidgets('First field is focused', (tester) async {
-    await tester.prepare();
+  testWidgets('First field is focused if autofocus is true', (tester) async {
+    await tester.prepare(autofocus: true);
     expect(tester.getFocusNodes()[0], predicate<FocusNode>((n) => n.hasFocus));
+  });
+
+  testWidgets('No field is not focused if autofocus is false', (tester) async {
+    await tester.prepare(autofocus: false);
+    expect(tester.getFocusNodes(),
+        predicate<List<FocusNode>>((n) => n.any((e) => !e.hasFocus)));
   });
 
   testWidgets('Arrow keys are moving the cursor', (tester) async {
@@ -92,7 +98,7 @@ void main() {
     setupPaste(isRegExpChanged: true);
 
     testWidgets('New RegExp', (tester) async {
-      await tester.prepare(RegExp(r'[a-zA-Z0-9]'));
+      await tester.prepare(regex: RegExp(r'[a-zA-Z0-9]'));
 
       List<FocusNode> nodes = tester.getFocusNodes();
       List<TextField> textFields = tester.getTextFields();

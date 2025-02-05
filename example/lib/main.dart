@@ -31,8 +31,10 @@ class MyCodeInput extends StatelessWidget {
     return Column(
       children: [
         VerificationCodeField(
+            autofocus: true,
             length: 5,
             spaceBetween: 10,
+            placeholder: '·',
             onFilled: (value) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

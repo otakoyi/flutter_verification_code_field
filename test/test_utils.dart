@@ -20,9 +20,10 @@ extension Repeat on int {
 }
 
 extension TesterX on WidgetTester {
-  Future<void> prepare([RegExp? regex]) async {
+  Future<void> prepare({RegExp? regex, bool autofocus = true}) async {
     await pumpWidget(AppWrapper(
         child: VerificationCodeField(
+      autofocus: autofocus,
       length: length,
       matchingPattern: regex,
     )));

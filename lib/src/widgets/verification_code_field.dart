@@ -15,6 +15,9 @@ class VerificationCodeField extends HookWidget {
     this.onFilled,
     this.size = const Size(40, 60),
     this.spaceBetween = 16,
+    this.placeholder = '',
+    this.showCursor,
+    this.autofocus = false,
     RegExp? matchingPattern,
     super.key,
   })  : assert(length > 0, 'Length must be positive'),
@@ -45,6 +48,15 @@ class VerificationCodeField extends HookWidget {
   ///
   /// default: RegExp(r'^\d+$') [RegExp].
   late final RegExp pattern;
+
+  /// Placeholder symbol
+  final String placeholder;
+
+  /// Show or hide the cursor
+  final bool? showCursor;
+
+  /// Autofocus
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -157,17 +169,26 @@ class VerificationCodeField extends HookWidget {
                         ),
                         child: VerificationCodeCharacterFieldWidget(
                           pattern: pattern,
+                          autofocus: autofocus,
                           controller: textControllers[index],
                           focusNode: focusNodes[index],
                           size: size,
+                          placeholder: placeholder,
+                          showCursor: showCursor,
                           onChanged: (value) {
                             if (value.isNotEmpty) {
                               moveToNext();
+                            }
+                            if (value.isEmpty &&
+                                code.value.where((e) => e.isNotEmpty).length >
+                                    index) {
+                              moveToPrevious();
                             }
                             code.value[index] = value;
                             final codeString = code.value.join();
                             if (onFilled != null &&
                                 codeString.length == length) {
+                              focusScope.unfocus();
                               onFilled?.call(codeString);
                             }
                           },
