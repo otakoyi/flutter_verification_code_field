@@ -1,3 +1,7 @@
+## 1.0.5
+
+* Updated dependecies
+
 ## 1.0.4
 
 * Fixed AdaptiveTextSelectionToolbar missing required fields
