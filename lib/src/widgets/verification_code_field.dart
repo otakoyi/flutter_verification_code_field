@@ -137,47 +137,38 @@ class VerificationCodeField extends HookWidget {
       },
       child: FocusScope(
         node: focusScope,
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            LayoutBuilder(
-              builder: (context, constraints) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (int index = 0; index < length; index++)
-                      Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        height: size.height,
-                        width: size.width,
-                        margin: EdgeInsets.only(
-                          left: index == 0 ? 0 : spaceBetween,
-                        ),
-                        child: VerificationCodeCharacterFieldWidget(
-                          pattern: pattern,
-                          controller: textControllers[index],
-                          focusNode: focusNodes[index],
-                          size: size,
-                          onChanged: (value) {
-                            if (value.isNotEmpty) {
-                              moveToNext();
-                            }
-                            code.value[index] = value;
-                            final codeString = code.value.join();
-                            if (onFilled != null &&
-                                codeString.length == length) {
-                              onFilled?.call(codeString);
-                            }
-                          },
-                          onPaste: onPaste,
-                        ),
-                      ),
-                  ],
-                );
-              },
-            ),
+            for (int index = 0; index < length; index++)
+              Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                height: size.height,
+                width: size.width,
+                margin: EdgeInsets.only(
+                  left: index == 0 ? 0 : spaceBetween,
+                ),
+                child: VerificationCodeCharacterFieldWidget(
+                  pattern: pattern,
+                  controller: textControllers[index],
+                  focusNode: focusNodes[index],
+                  size: size,
+                  onChanged: (value) {
+                    if (value.isNotEmpty) {
+                      moveToNext();
+                    }
+                    code.value[index] = value;
+                    final codeString = code.value.join();
+                    if (onFilled != null && codeString.length == length) {
+                      onFilled?.call(codeString);
+                    }
+                  },
+                  onPaste: onPaste,
+                ),
+              ),
           ],
         ),
       ),
