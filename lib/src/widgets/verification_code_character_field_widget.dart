@@ -16,7 +16,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     required this.placeholder,
     required this.showCursor,
     required this.autofocus,
-    this.autofillHints,
     super.key,
   });
 
@@ -49,9 +48,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   /// Autofocus
   final bool autofocus;
 
-  /// Autofill hints for the first box
-  final Iterable<String>? autofillHints;
-
   @override
   Widget build(BuildContext context) {
     final decoration = InputDecoration(
@@ -74,7 +70,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
       style: TextStyle(fontSize: size.height / 2),
       cursorHeight: size.height / 2,
       showCursor: showCursor,
-      autofillHints: autofillHints,
       contextMenuBuilder: (context, editableTextState) {
         return AdaptiveTextSelectionToolbar.editable(
           onShare: null,

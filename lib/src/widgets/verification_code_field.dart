@@ -70,20 +70,6 @@ class VerificationCodeField extends HookWidget {
     /// Used to move the focus to the previous OTP field
     final moveToPrevious = useCallback(() {
       if (currentIndex.value > 0) {
-        for (var i = currentIndex.value - 1; i > 0; i--) {
-          if (textControllers[i].text.isEmpty) continue;
-          currentIndex.value = i;
-          focusScope.requestFocus(focusNodes[i]);
-          return;
-        }
-
-        focusScope.requestFocus(focusNodes[0]);
-      }
-    });
-
-    /// Used to move the focus to the previous OTP field
-    final moveToPreviousSingle = useCallback(() {
-      if (currentIndex.value > 0) {
         currentIndex.value--;
         focusScope.requestFocus(focusNodes[currentIndex.value]);
       }
@@ -129,7 +115,7 @@ class VerificationCodeField extends HookWidget {
             return KeyEventResult.handled;
           }
           if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-            moveToPreviousSingle();
+            moveToPrevious();
             return KeyEventResult.handled;
           }
           if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
@@ -148,10 +134,6 @@ class VerificationCodeField extends HookWidget {
           focusNode.addListener(() {
             if (focusNode.hasFocus) {
               currentIndex.value = index;
-              if (textControllers[index].text.isNotEmpty) {
-                textControllers[index].selection =
-                    TextSelection.collapsed(offset: 1);
-              }
             }
           });
         }
@@ -184,12 +166,13 @@ class VerificationCodeField extends HookWidget {
                     size: size,
                     placeholder: placeholder,
                     showCursor: showCursor,
-                    autofillHints: [AutofillHints.oneTimeCode],
                     onChanged: (value) {
                       if (value.isNotEmpty) {
                         moveToNext();
                       }
-                      if (value.isEmpty) {
+                      if (value.isEmpty &&
+                          code.value.where((e) => e.isNotEmpty).length >
+                              index) {
                         moveToPrevious();
                       }
                       code.value[index] = value;

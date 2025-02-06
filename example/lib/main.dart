@@ -26,23 +26,26 @@ class MyCodeInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-          inputDecorationTheme:
-              InputDecorationTheme(border: OutlineInputBorder())),
-      child: VerificationCodeField(
-          autofocus: true,
-          length: 5,
-          spaceBetween: 10,
-          placeholder: '•',
-          size: const Size(56, 62),
-          onFilled: (value) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('$value Submitted successfully! 🎉'),
-              ),
-            );
-          }),
+    return Column(
+      children: [
+        Theme(
+          data: ThemeData(
+              inputDecorationTheme:
+                  InputDecorationTheme(border: OutlineInputBorder())),
+          child: VerificationCodeField(
+              autofocus: true,
+              length: 5,
+              spaceBetween: 10,
+              placeholder: '·',
+              onFilled: (value) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('$value Submitted successfully! 🎉'),
+                  ),
+                );
+              }),
+        ),
+      ],
     );
   }
 }
