@@ -1,3 +1,7 @@
+## 1.0.8
+
+* Added AutofillHints
+
 ## 1.0.7
 
 * Fixed paddings
