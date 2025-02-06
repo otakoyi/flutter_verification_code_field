@@ -81,6 +81,14 @@ class VerificationCodeField extends HookWidget {
       }
     });
 
+    /// Used to move the focus to the previous OTP field
+    final moveToPreviousSingle = useCallback(() {
+      if (currentIndex.value > 0) {
+        currentIndex.value--;
+        focusScope.requestFocus(focusNodes[currentIndex.value]);
+      }
+    });
+
     /// Used to move the focus to the next OTP field
     final moveToNext = useCallback(() {
       if (currentIndex.value < length - 1) {
@@ -121,7 +129,7 @@ class VerificationCodeField extends HookWidget {
             return KeyEventResult.handled;
           }
           if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-            moveToPrevious();
+            moveToPreviousSingle();
             return KeyEventResult.handled;
           }
           if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
@@ -140,8 +148,10 @@ class VerificationCodeField extends HookWidget {
           focusNode.addListener(() {
             if (focusNode.hasFocus) {
               currentIndex.value = index;
-              textControllers[index].selection =
-                  TextSelection.collapsed(offset: 1);
+              if (textControllers[index].text.isNotEmpty) {
+                textControllers[index].selection =
+                    TextSelection.collapsed(offset: 1);
+              }
             }
           });
         }
