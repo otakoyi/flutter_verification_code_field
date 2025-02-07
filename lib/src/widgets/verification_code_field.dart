@@ -18,6 +18,9 @@ class VerificationCodeField extends HookWidget {
     this.placeholder = '',
     this.showCursor,
     this.autofocus = false,
+    this.hasError = false,
+    this.readOnly = false,
+    this.enabled,
     RegExp? matchingPattern,
     super.key,
   })  : assert(length > 0, 'Length must be positive'),
@@ -57,6 +60,15 @@ class VerificationCodeField extends HookWidget {
 
   /// Autofocus
   final bool autofocus;
+
+  /// Whether the underlying textfields have errors
+  final bool hasError;
+
+  /// Whether the underlying textfields are read only
+  final bool readOnly;
+
+  /// Whether the underlying textfields are enabled or disabled
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -183,6 +195,9 @@ class VerificationCodeField extends HookWidget {
                     focusNode: focusNodes[index],
                     size: size,
                     placeholder: placeholder,
+                    hasError: hasError,
+                    enabled: enabled,
+                    readOnly: readOnly,
                     showCursor: showCursor,
                     autofillHints: [AutofillHints.oneTimeCode],
                     onChanged: (value) {

@@ -17,6 +17,9 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     required this.showCursor,
     required this.autofocus,
     this.autofillHints,
+    this.readOnly = false,
+    this.hasError = false,
+    this.enabled,
     super.key,
   });
 
@@ -52,20 +55,32 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   /// Autofill hints for the first box
   final Iterable<String>? autofillHints;
 
+  /// Whether the underlying textfields have errors
+  final bool hasError;
+
+  /// Whether the underlying textfields are read only
+  final bool readOnly;
+
+  /// Whether the underlying textfields are enabled or disabled
+  final bool? enabled;
+
   @override
   Widget build(BuildContext context) {
     final decoration = InputDecoration(
-      counterText: '',
-      errorMaxLines: 1,
-      // Centers text which otherwise is skewered 4 px to the left
-      contentPadding: EdgeInsets.only(left: 2),
-      hintText: placeholder,
-    );
+        counterText: '',
+        errorMaxLines: 1,
+        // Centers text which otherwise is skewered 4 px to the left
+        contentPadding: EdgeInsets.only(left: 2),
+        hintText: placeholder,
+        errorStyle: TextStyle(height: double.minPositive),
+        errorText: hasError ? '' : null);
 
     return TextField(
       expands: true,
       minLines: null,
       maxLines: null,
+      enabled: enabled,
+      readOnly: readOnly,
       controller: controller,
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.allow(pattern)],

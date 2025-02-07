@@ -1,3 +1,7 @@
+## 1.0.9
+
+* Added readOnly, enabled and hasError parameters
+
 ## 1.0.8
 
 * Added AutofillHints
