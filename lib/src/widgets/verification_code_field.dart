@@ -84,9 +84,14 @@ class VerificationCodeField extends HookWidget {
 
     useEffect(() {
       void listener() {
+        final code = controller?.value.split('') ?? [];
         for (var i = 0; i < length; i++) {
-          textControllers[i].text =
-              controller?.value.characters.elementAt(i) ?? '';
+          if (i < code.length) {
+            textControllers[i].text =
+                controller?.value.characters.elementAt(i) ?? '';
+          } else {
+            textControllers[i].text = '';
+          }
         }
       }
 
