@@ -181,7 +181,7 @@ class VerificationCodeField extends HookWidget {
               currentIndex.value = index;
               if (textControllers[index].text.isNotEmpty) {
                 textControllers[index].selection =
-                    TextSelection.collapsed(offset: 1);
+                    TextSelection(baseOffset: 0, extentOffset: 1);
               }
             }
           });
@@ -230,7 +230,6 @@ class VerificationCodeField extends HookWidget {
                           textControllers.map((e) => e.text).join();
                       controller?.value = codeString;
                       if (onFilled != null && codeString.length == length) {
-                        focusScope.unfocus();
                         onFilled?.call(codeString);
                       }
                     },

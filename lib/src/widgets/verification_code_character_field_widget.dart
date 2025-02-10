@@ -90,6 +90,7 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
       cursorHeight: size.height / 2,
       showCursor: showCursor,
       autofillHints: autofillHints,
+      selectionControls: EmptyTextSelectionControls(),
       contextMenuBuilder: (context, editableTextState) {
         return AdaptiveTextSelectionToolbar.editable(
           onShare: null,

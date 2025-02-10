@@ -34,6 +34,7 @@ class MyCodeInput extends StatelessWidget {
           autofocus: true,
           length: 5,
           hasError: true,
+          showCursor: false,
           spaceBetween: 10,
           placeholder: '•',
           size: const Size(56, 62),

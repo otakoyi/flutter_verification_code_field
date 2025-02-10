@@ -1,3 +1,7 @@
+## 1.1.3
+
+* Improved selection handling on focus
+
 ## 1.1.0
 
 * Added optional controller parameter that enables reacting to code change outside of the widget
