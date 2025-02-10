@@ -1,3 +1,7 @@
+## 1.1.5
+
+* Selection handles color is now transparent as well
+
 ## 1.1.4
 
 * Selection color is now transparent
