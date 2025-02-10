@@ -76,12 +76,23 @@ class VerificationCodeField extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final code = useRef(List.filled(length, ''));
     final textControllers = useTextControllerList(length: length);
     final focusNodes =
         useFocusNodeList(length: length, debugLabel: 'codeInput');
     final focusScope = useFocusScopeNode();
     final currentIndex = useRef(0);
+
+    useEffect(() {
+      void listener() {
+        for (var i = 0; i < length; i++) {
+          textControllers[i].text =
+              controller?.value.characters.elementAt(i) ?? '';
+        }
+      }
+
+      controller?.addListener(listener);
+      return () => controller?.removeListener(listener);
+    }, []);
 
     /// Used to move the focus to the previous OTP field
     final moveToPrevious = useCallback(() {
@@ -123,7 +134,7 @@ class VerificationCodeField extends HookWidget {
         return;
       }
       for (var i = 0; i < length; i++) {
-        textControllers[i].text = code.value[i] = latestClipboard[i];
+        textControllers[i].text = latestClipboard[i];
       }
       onFilled?.call(latestClipboard);
       focusScope.requestFocus(focusNodes.lastOrNull);
@@ -138,7 +149,7 @@ class VerificationCodeField extends HookWidget {
           if (event is KeyUpEvent) {
             return KeyEventResult.handled;
           }
-          final character = code.value[currentIndex.value];
+          final character = textControllers[currentIndex.value].text;
           if (event.logicalKey == LogicalKeyboardKey.backspace &&
               character.isEmpty) {
             moveToPrevious();
@@ -153,8 +164,7 @@ class VerificationCodeField extends HookWidget {
             return KeyEventResult.handled;
           }
           if (character.isNotEmpty && pattern.hasMatch(event.character ?? '')) {
-            textControllers[currentIndex.value].text =
-                code.value[currentIndex.value] = event.character ?? '';
+            textControllers[currentIndex.value].text = event.character ?? '';
             moveToNext();
             return KeyEventResult.handled;
           }
@@ -211,8 +221,8 @@ class VerificationCodeField extends HookWidget {
                       if (value.isEmpty) {
                         moveToPrevious();
                       }
-                      code.value[index] = value;
-                      final codeString = code.value.join();
+                      final codeString =
+                          textControllers.map((e) => e.text).join();
                       controller?.value = codeString;
                       if (onFilled != null && codeString.length == length) {
                         focusScope.unfocus();
