@@ -20,6 +20,7 @@ class VerificationCodeField extends HookWidget {
     this.autofocus = false,
     this.hasError = false,
     this.readOnly = false,
+    this.controller,
     this.enabled,
     RegExp? matchingPattern,
     super.key,
@@ -69,6 +70,9 @@ class VerificationCodeField extends HookWidget {
 
   /// Whether the underlying textfields are enabled or disabled
   final bool? enabled;
+
+  /// Optional controller to react to field changes
+  final ValueNotifier<String>? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -209,6 +213,7 @@ class VerificationCodeField extends HookWidget {
                       }
                       code.value[index] = value;
                       final codeString = code.value.join();
+                      controller?.value = codeString;
                       if (onFilled != null && codeString.length == length) {
                         focusScope.unfocus();
                         onFilled?.call(codeString);

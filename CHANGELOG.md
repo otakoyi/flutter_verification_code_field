@@ -1,3 +1,8 @@
+## 1.1.0
+
+* Added optional controller parameter that enables reacting to code change outside of the widget
+
+
 ## 1.0.9
 
 * Added readOnly, enabled and hasError parameters
