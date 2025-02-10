@@ -67,53 +67,67 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final decoration = InputDecoration(
-        counterText: '',
-        errorMaxLines: 1,
-        // Centers text which otherwise is skewered 4 px to the left
-        contentPadding: EdgeInsets.only(left: 2),
-        hintText: placeholder,
-        errorStyle: TextStyle(height: double.minPositive),
-        errorText: hasError ? '' : null);
+      counterText: '',
+      errorMaxLines: 1,
+      // Centers text which otherwise is skewered 4 px to the left
+      contentPadding: EdgeInsets.only(left: 2),
+      hintText: placeholder,
+      errorStyle: TextStyle(height: double.minPositive),
+      errorText: hasError ? '' : null,
+    );
 
-    return TextField(
-      expands: true,
-      minLines: null,
-      maxLines: null,
-      enabled: enabled,
-      readOnly: readOnly,
-      controller: controller,
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.allow(pattern)],
-      maxLength: 1,
-      focusNode: focusNode,
-      style: TextStyle(fontSize: size.height / 2),
-      cursorHeight: size.height / 2,
-      showCursor: showCursor,
-      autofillHints: autofillHints,
-      selectionControls: EmptyTextSelectionControls(),
-      contextMenuBuilder: (context, editableTextState) {
-        return AdaptiveTextSelectionToolbar.editable(
-          onShare: null,
-          onSearchWeb: null,
-          onLookUp: null,
-          clipboardStatus: ClipboardStatus.pasteable,
-          onCopy: null,
-          onCut: null,
-          onPaste: () {
-            onPaste();
-            editableTextState.hideToolbar();
-          },
-          onSelectAll: null,
-          anchors: editableTextState.contextMenuAnchors,
-          onLiveTextInput: null,
-        );
-      },
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      autocorrect: false,
-      textAlign: TextAlign.center,
-      autofocus: autofocus,
-      decoration: decoration,
-      onChanged: onChanged,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        textSelectionTheme: TextSelectionThemeData(
+          selectionColor: Colors.transparent,
+          selectionHandleColor: Colors.transparent,
+        ),
+      ),
+      child: TextField(
+        expands: true,
+        minLines: null,
+        maxLines: null,
+        enabled: enabled,
+        readOnly: readOnly,
+        controller: controller,
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.allow(pattern)],
+        maxLength: 1,
+        focusNode: focusNode,
+        style: TextStyle(fontSize: size.height / 2),
+        cursorHeight: size.height / 2,
+        showCursor: showCursor,
+        autofillHints: autofillHints,
+        onTap: () {
+          if (controller.text.isNotEmpty) {
+            controller.selection =
+                TextSelection(baseOffset: 0, extentOffset: 1);
+          }
+        },
+        contextMenuBuilder: (context, editableTextState) {
+          return AdaptiveTextSelectionToolbar.editable(
+            onShare: null,
+            onSearchWeb: null,
+            onLookUp: null,
+            clipboardStatus: ClipboardStatus.pasteable,
+            onCopy: null,
+            onCut: null,
+            onPaste: () {
+              onPaste();
+              editableTextState.hideToolbar();
+            },
+            onSelectAll: null,
+            anchors: editableTextState.contextMenuAnchors,
+            onLiveTextInput: null,
+          );
+        },
+        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+        autocorrect: false,
+        textAlign: TextAlign.center,
+        autofocus: autofocus,
+        decoration: decoration,
+        onChanged: onChanged,
+      ),
     );
   }
 }

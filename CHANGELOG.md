@@ -1,3 +1,7 @@
+## 1.1.4
+
+* Selection color is now transparent
+
 ## 1.1.3
 
 * Improved selection handling on focus
