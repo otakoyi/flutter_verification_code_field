@@ -189,10 +189,6 @@ class VerificationCodeField extends HookWidget {
         for (final (index, focusNode) in focusNodes.indexed) {
           focusNode.addListener(() {
             if (focusNode.hasFocus) {
-              if (textControllers[index].text.isEmpty) {
-                moveToPrevious();
-                return;
-              }
               currentIndex.value = index;
               if (textControllers[index].text.isNotEmpty) {
                 textControllers[index].selection =
