@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Added sms autofill
+
 ## 1.1.5
 
 * Selection handles color is now transparent as well

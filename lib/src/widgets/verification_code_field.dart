@@ -4,10 +4,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_verification_code_field/src/hooks/focus_node_list_hook.dart';
 import 'package:flutter_verification_code_field/src/hooks/text_controller_list_hook.dart';
 import 'package:flutter_verification_code_field/src/widgets/verification_code_character_field_widget.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 /// The VerificationCodeField entry point
 ///
 /// To use the VerificationCodeField class, call VerificationCodeField(length: $length)
+// ignore: must_be_immutable
 class VerificationCodeField extends HookWidget {
   /// Default constructor for [VerificationCodeField]
   VerificationCodeField({
@@ -82,7 +84,13 @@ class VerificationCodeField extends HookWidget {
     final focusScope = useFocusScopeNode();
     final currentIndex = useRef(0);
 
+    final autofill = useMemoized(SmsAutoFill.new);
+
     useEffect(() {
+      final subscription = autofill.code.listen((code) {
+        controller?.value = code;
+      });
+
       void listener() {
         final code = controller?.value.split('') ?? [];
         for (var i = 0; i < length; i++) {
@@ -96,7 +104,10 @@ class VerificationCodeField extends HookWidget {
       }
 
       controller?.addListener(listener);
-      return () => controller?.removeListener(listener);
+      return () {
+        controller?.removeListener(listener);
+        subscription.cancel();
+      };
     }, []);
 
     /// Used to move the focus to the previous OTP field
@@ -178,6 +189,10 @@ class VerificationCodeField extends HookWidget {
         for (final (index, focusNode) in focusNodes.indexed) {
           focusNode.addListener(() {
             if (focusNode.hasFocus) {
+              if (textControllers[index].text.isEmpty) {
+                moveToPrevious();
+                return;
+              }
               currentIndex.value = index;
               if (textControllers[index].text.isNotEmpty) {
                 textControllers[index].selection =
@@ -218,7 +233,6 @@ class VerificationCodeField extends HookWidget {
                     enabled: enabled,
                     readOnly: readOnly,
                     showCursor: showCursor,
-                    autofillHints: [AutofillHints.oneTimeCode],
                     onChanged: (value) {
                       if (value.isNotEmpty) {
                         moveToNext();

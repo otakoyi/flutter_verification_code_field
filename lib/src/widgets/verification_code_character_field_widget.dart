@@ -16,7 +16,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
     required this.placeholder,
     required this.showCursor,
     required this.autofocus,
-    this.autofillHints,
     this.readOnly = false,
     this.hasError = false,
     this.enabled,
@@ -51,9 +50,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
 
   /// Autofocus
   final bool autofocus;
-
-  /// Autofill hints for the first box
-  final Iterable<String>? autofillHints;
 
   /// Whether the underlying textfields have errors
   final bool hasError;
@@ -97,7 +93,6 @@ class VerificationCodeCharacterFieldWidget extends StatelessWidget {
         style: TextStyle(fontSize: size.height / 2),
         cursorHeight: size.height / 2,
         showCursor: showCursor,
-        autofillHints: autofillHints,
         onTap: () {
           if (controller.text.isNotEmpty) {
             controller.selection =
