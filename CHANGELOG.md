@@ -1,3 +1,7 @@
+## 1.2.2
+
+* Update dependencies
+
 ## 1.2.1
 
 * Bugfix

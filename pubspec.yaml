@@ -1,16 +1,16 @@
 name: flutter_verification_code_field
 description: Flutter verification code input. Primarily used for entering or pasting OTP codes from authorization emails or messages.
-version: 1.2.1
+version: 1.2.2
 homepage: https://github.com/otakoyi/flutter_verification_code_field
 
 environment:
   sdk: '^3.1.0'
-  flutter: ">=1.17.0"
+  flutter: ">=2.21.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.20.0
+  flutter_hooks: ^0.21.2
   sms_autofill: ^2.4.1
 
 dev_dependencies:
